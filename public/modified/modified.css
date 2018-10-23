@@ -1,0 +1,65 @@
+
+.action-btn{
+  width:200px!important;
+  min-width: 150px!important;
+}
+.btn{
+  /*margin: 0!important;*/
+  /*padding: 5px!important;*/
+}
+.m-btn{
+  margin: 0!important;
+  padding: 5px!important;
+}
+
+.label {
+  color: white;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.success {background-color: #4CAF50;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.warning {background-color: #ff9800;} /* Orange */
+.mod-btn-danger {background-color: #f44336;} /* Red */
+.mod-btn-other {background-color: #e7e7e7; color: black;} /* Gray */
+
+.form-i-control{
+
+  color: #fdfdfd;
+  font-weight: bold !important;
+  line-height: 1.1;
+  -webkit-appearance: none;
+
+  background: no-repeat center bottom, center calc(100% - 1px);
+  background-size: 0 100%, 100% 100%;
+  border: 0;
+  height: 36px;
+  transition: background 0s ease-out;
+  padding-left: 6px;
+  padding-right: 0;
+  border-radius: 0;
+  font-size: 14px;
+  /* text-align: center; */
+  margin-left: 5px;
+
+  background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, rgba(180, 180, 180, 0.1) 1px, rgba(180, 180, 180, 0) 1px);
+
+}
+
+
+.form-i-control option{
+  background-color: #202940;
+}
+.card .table-responsive{
+  overflow-x: hidden!important;
+}
+
+.dataTables_empty{
+  /*color:#8229A0 !important;*/
+  background:#202940 !important;
+  font-weight:bold !important;
+}
+.bold{
+  font-weight: bold;
+}
