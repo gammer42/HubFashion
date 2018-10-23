@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('navbar')
-    <a class="navbar-brand bold" href="#">Category Updated by Authority</a>
+    <a class="navbar-brand bold" href="#">Brands Updated by Authority</a>
 @endsection
 @section('content')
 
@@ -20,11 +20,11 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title bold">{{ __('Update Category') }}</h4>
-                                    <p class="card-category">{{ __('Authority can Update Category Here...') }}</p>
+                                    <h4 class="card-title bold">{{ __('Update Brands') }}</h4>
+                                    <p class="card-category">{{ __('Authority can Update Brands Here...') }}</p>
                                 </div>
                                 <div class="card-body" >
-                                    <form action="{{ route('categories.update',$categories->id) }}" method="POST">
+                                    <form action="{{ route('brands.update',$brands->id) }}" method="POST">
                                         @CSRF
                                         @METHOD('PUT')
                                         <div class="row">
@@ -45,34 +45,8 @@
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Category Name') }}</label>
-                                                    <input type="text" id="category_name" class="form-control" name="name" onclick="toSlug(this)" value="{{ $categories->name }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Parent Category') }}</label>
-                                                    <select style="color: #ffffff;" class="form-control" name="parent" id="parent">
-                                                        <option class=" bold" style="background-color:#202940; color:#fff;" value="{{ $categories->parent_id == 0? "0":"$categories->parent_id" }}">{{ $categories->parent_id == 0?"Root":"$categories->parent_name" }}</option>
-                                                        @if($categories->parent_id != 0)
-                                                        <option class=" bold" style="background-color:gray; color:#fff;" value="0">{{ __('/') }}</option>
-                                                        @endif
-                                                        @foreach($parents as $parent)
-                                                            @if($categories->id > $parent->id)
-                                                                @if($parent->id != $categories->parent_id)
-                                                                    <option class=" bold" style="background-color:#0e0e40; color:#fff; "value="{{ $parent->id }}">{{ $parent->name }}</option>
-                                                                    @if($parent->children->count())
-                                                                        @foreach($parent->children as $child)
-                                                                            <option style="background-color:#153140;; "value="{{ $child->id }}">./{{ $child->name }}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                @endif
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
+                                                    <label class="bmd-label-floating bold">{{ __('Brands Name') }}</label>
+                                                    <input type="text" id="category_name" class="form-control" name="name" onclick="toSlug(this)" value="{{ $brands->name }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -85,6 +59,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    @foreach($permissions as $permission)
+                                                        <div class="col-md-6" style="float:left;">
+                                                            <label class="checkbox inline">
+                                                                <input name="permissions[]" class="selectAll" type="checkbox"  value="{{$permission->id}}" {{ in_array($permission->id,$checked)? "checked":"" }}>
+                                                                {{$permission->display_name}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">

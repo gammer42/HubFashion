@@ -116,12 +116,12 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary pull-right">Update User</button>
+                                                    <button type="submit" class="btn btn-primary pull-right">Update Role</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('admin-user.index')}}" >Cancel</a></button>
+                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('roles.index')}}" >Cancel</a></button>
                                                 </div>
                                             </div>
                                         </div>

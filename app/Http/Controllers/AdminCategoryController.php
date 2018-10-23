@@ -20,7 +20,7 @@ class AdminCategoryController extends Controller
     {
         $categories = DB::table('categories AS child')
             ->join('categories AS parent', 'parent.id', '=', 'child.parent_id')
-            ->select('child.id','child.cat_name','child.slug','child.cat_status','child.parent_id','parent.cat_name as parent_name')
+            ->select('child.id','child.name','child.slug','child.status','child.parent_id','parent.name as parent_name')
             ->get();
 
 //        dd($categories);
@@ -36,7 +36,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::with('children')->where('parent_id','=',0)->orderBy('cat_name', 'asc')->get();
+        $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name', 'asc')->get();
         return view('admin.category.create', compact('categories'));
     }
 
@@ -49,18 +49,18 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'cat_name' => 'required|max:190|string',
+            'name' => 'required|max:190|string',
             'parent' => 'required',
             'slug' => 'required|string|max:190|unique:categories',
-            'cat_status' => 'required'
+            'status' => 'required'
         ]);
 
         $store = new Category();
 
-        $store->cat_name = $request->cat_name;
+        $store->name = $request->name;
         $store->parent_id = $request->parent;
         $store->slug = $request->slug;
-        $store->cat_status = $request->cat_status;
+        $store->status = $request->status;
 
         $store->save();
 
@@ -77,16 +77,16 @@ class AdminCategoryController extends Controller
      */
     public function show($id)
     {
-        $show = Category::query()->where('parent_id','=',0)->first();
+        $show = Category::query()->where('parent_id','=',0)->where('id',$id)->first();
 
-        if($show = null){
+        if($show != null){
             $categories = $show;
         }
         else {
             $categories = DB::table('categories AS child')
                 ->join('categories AS parent', 'parent.id', '=', 'child.parent_id')
                 ->where('child.id', '=', $id)
-                ->select('child.id', 'child.cat_name', 'child.slug', 'child.cat_status', 'child.parent_id', 'parent.cat_name as parent_name')
+                ->select('child.id', 'child.name', 'child.slug', 'child.status', 'child.parent_id', 'parent.name as parent_name')
                 ->first();
         }
         return view('admin.category.show', compact('categories'));
@@ -100,7 +100,7 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        $temp = Category::query()->where('parent_id','=',0)->first();
+        $temp = Category::query()->where('parent_id','=',0)->where('id',$id)->first();
 
         if($temp != null){
             $categories = $temp;
@@ -109,10 +109,10 @@ class AdminCategoryController extends Controller
             $categories = DB::table('categories AS child')
                 ->join('categories AS parent', 'parent.id', '=', 'child.parent_id')
                 ->where('child.id', '=', $id)
-                ->select('child.id', 'child.cat_name', 'child.slug', 'child.cat_status', 'child.parent_id', 'parent.cat_name as parent_name')
+                ->select('child.id', 'child.name', 'child.slug', 'child.status', 'child.parent_id', 'parent.name as parent_name')
                 ->first();
         }
-        $parents = Category::with('children')->where('parent_id','=',0)->orderBy('cat_name', 'asc')->get();
+        $parents = Category::with('children')->where('parent_id','=',0)->orderBy('name', 'asc')->get();
 //        dd($categories);
         return view('admin.category.edit', compact('categories','parents'));
     }
@@ -130,26 +130,26 @@ class AdminCategoryController extends Controller
 
         if($request->slug != $store->slug)
         $this->validate($request,[
-            'cat_name' => 'required|max:190|string',
+            'name' => 'required|max:190|string',
             'parent' => 'required',
             'slug' => 'required|string|max:190|unique:categories',
-            'cat_status' => 'required'
+            'status' => 'required'
         ]);
 
         else
         $this->validate($request,[
-            'cat_name' => 'required|max:190|string',
+            'name' => 'required|max:190|string',
             'parent' => 'required',
             'slug' => 'required|string|max:190',
-            'cat_status' => 'required'
+            'status' => 'required'
         ]);
 
 
 
-        $store->cat_name = $request->cat_name;
+        $store->name = $request->name;
         $store->parent_id = $request->parent;
         $store->slug = $request->slug;
-        $store->cat_status = $request->cat_status;
+        $store->status = $request->status;
 
         $store->save();
 
@@ -168,7 +168,7 @@ class AdminCategoryController extends Controller
 
         $cat = DB::table('categories')->where('parent_id', $id)->first();
         if($cat == null){
-            Category::query()->findOrFail($id)->delete();
+//            Category::query()->findOrFail($id)->delete();
             Session::flash('message','Category Deleted Successfully!!!');
         }
         else{

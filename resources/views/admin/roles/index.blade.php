@@ -163,7 +163,7 @@
                                                     <form style="display: inline !important;" action="{{route('roles.destroy', $genRole->id)}}" method="POST">
                                                         @CSRF
                                                         @METHOD('DELETE')
-                                                    <button type="submit" class="m-btn btn btn-danger" title="Delete User" onclick="return confirmDelete()">
+                                                    <button type="submit" class="m-btn btn btn-danger" title="Delete User" onclick="return confirmDel()">
                                                         <i class="material-icons">delete</i>
                                                     </button>
                                                     </form>
@@ -212,7 +212,7 @@
             ub.style.display = ((ub.style.display!=='none') ? 'none' : 'block');
         }
 
-        function confirmDelete() {
+        function confirmDel() {
             let del = confirm('Are you sure to delete this Role?');
             if(del)
                 return true;

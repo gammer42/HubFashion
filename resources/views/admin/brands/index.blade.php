@@ -5,7 +5,7 @@
 @endsection
 
 @section('navbar')
-	<a class="navbar-brand" href="#" title="View Customer Users table">Category Table</a>
+	<a class="navbar-brand" href="#" title="View Customer Users table">Brands</a>
 @endsection
 
 @section('content')
@@ -34,11 +34,11 @@
 								</div>
 								<div class="card-header card-header-primary">
 									<div class="col-md-4 "style="float:left;">
-										<h4 class="card-title ">Category</h4>
-										<p class="card-category">Category Table</p>
+										<h4 class="card-title ">Brands</h4>
+										<p class="card-category">Brands Table</p>
 									</div>
 									<div class="col-md-4" style="float:left;">
-										<h4 class="card-title"><a  class="nav-link navbar-brand" href="{{route('categories.create')}}"  title="Create New Role">{{ __('Create New Category') }}</a></h4>
+										<h4 class="card-title"><a  class="nav-link navbar-brand" href="{{route('brands.create')}}"  title="Create New Role">{{ __('Create New Brands') }}</a></h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -49,13 +49,13 @@
 												SL No
 											</th>
 											<th>
-												Category Name
+												Brands Name
 											</th>
 											<th>
 												Slug
 											</th>
 											<th>
-												Parent
+												Category
 											</th>
 											<th>
 												Status
@@ -66,73 +66,35 @@
 											</thead>
 											<tbody>
 											<?php $i=0; ?>
-                                            @foreach($roots as $category)
+											@foreach($brands as $brand)
 												<tr style="background:#202940;">
 													<td>
 														{{ ++$i }}
 													</td>
 													<td>
-														{{ $category->name }}
+														{{ $brand->name }}
 													</td>
 													<td>
-														{{ $category->slug }}
+														{{ $brand->slug }}
 													</td>
 													<td>
-														<span class="label success">{{ __('Root Parent') }}</span>
+														<span class="label success">{{ $brand->parent_name }}</span>
 													</td>
 													<td>
-                                                        @if($category->status == 1)
+                                                        @if($brand->status == 1)
                                                             <span class="label success">{{ __('Active') }}</span>
                                                         @else
                                                             <span class="label warning">{{ __('Inactive') }}</span>
                                                         @endif
 													</td>
 													<td class="center">
-														<a class="m-btn btn btn-success" href="{{route('categories.show',$category->id)}}">
+														<a class="m-btn btn btn-success" href="{{route('categories.show',$brand->id)}}">
 															<i class="material-icons">search</i>
 														</a>
-														<a class="m-btn btn btn-info" href="{{route('categories.edit',$category->id)}}">
+														<a class="m-btn btn btn-info" href="{{route('categories.edit',$brand->id)}}">
 															<i class="material-icons">settings</i>
 														</a>
-                                                        <form style="display: inline !important;" action="{{route('categories.destroy', $category->id)}}" method="POST">
-                                                            @CSRF
-                                                            @METHOD('DELETE')
-                                                            <button type="submit" class="m-btn btn btn-danger" title="Delete User" onclick="return confirmDel()">
-                                                                <i class="material-icons">delete</i>
-                                                            </button>
-                                                        </form>
-													</td>
-												</tr>
-											@endforeach
-											@foreach($categories as $category)
-												<tr style="background:#202940;">
-													<td>
-														{{ ++$i }}
-													</td>
-													<td>
-														{{ $category->name }}
-													</td>
-													<td>
-														{{ $category->slug }}
-													</td>
-													<td>
-														<span class="label success">{{ $category->parent_name }}</span>
-													</td>
-													<td>
-                                                        @if($category->status == 1)
-                                                            <span class="label success">{{ __('Active') }}</span>
-                                                        @else
-                                                            <span class="label warning">{{ __('Inactive') }}</span>
-                                                        @endif
-													</td>
-													<td class="center">
-														<a class="m-btn btn btn-success" href="{{route('categories.show',$category->id)}}">
-															<i class="material-icons">search</i>
-														</a>
-														<a class="m-btn btn btn-info" href="{{route('categories.edit',$category->id)}}">
-															<i class="material-icons">settings</i>
-														</a>
-                                                        <form style="display: inline !important;" action="{{route('categories.destroy', $category->id)}}" method="POST">
+                                                        <form style="display: inline !important;" action="{{route('categories.destroy', $brand->id)}}" method="POST">
                                                             @CSRF
                                                             @METHOD('DELETE')
                                                             <button type="submit" class="m-btn btn btn-danger" title="Delete User" onclick="return confirmDel()">
