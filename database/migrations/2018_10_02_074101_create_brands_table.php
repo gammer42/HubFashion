@@ -21,16 +21,16 @@ class CreateBrandsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('categories_brands', function (Blueprint $table) {
-            $table->integer('categories_id')->unsigned();
-            $table->integer('brands_id')->unsigned();
+        Schema::create('brand_category', function (Blueprint $table) {
+            $table->integer('category_id')->unsigned();
+            $table->integer('brand_id')->unsigned();
 
-            $table->foreign('categories_id')->references('id')->on('categories')
+            $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('brands_id')->references('id')->on('brands')
+            $table->foreign('brand_id')->references('id')->on('brands')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['categories_id', 'brands_id']);
+            $table->primary(['category_id', 'brand_id']);
         });
     }
 

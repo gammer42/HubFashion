@@ -44,25 +44,26 @@
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table" id="table_id">
-											<thead class=" text-primary">
-											<th>
-												SL No
-											</th>
-											<th>
-												Brands Name
-											</th>
-											<th>
-												Slug
-											</th>
-											<th>
-												Category
-											</th>
-											<th>
-												Status
-											</th>
-											<th class="action-btn">
-												Action
-											</th>
+											<!-- <thead class=" text-primary"> -->
+                                            <thead class=" text-primary">
+                                            <th style="width: 50px;">
+                                                SL No
+                                            </th>
+                                            <th style="width: 120px;">
+                                                Name
+                                            </th>
+                                            <th style="width: 120px;">
+                                                Slug
+                                            </th>
+                                            <th style="width: 350px;">
+                                                Category
+                                            </th>
+                                            <th style="width: 100px;">
+                                                Status
+                                            </th>
+                                            <th class="action-btn">
+                                                Action
+                                            </th>
 											</thead>
 											<tbody>
 											<?php $i=0; ?>
@@ -78,23 +79,27 @@
 														{{ $brand->slug }}
 													</td>
 													<td>
-														<span class="label success">{{ $brand->parent_name }}</span>
+                                                        @foreach($categories as $category)
+                                                            @if($brand->id === $category->id)
+                                                            <span class="label spacial mod-btn-other">{{ $category->name }}</span>
+                                                            @endif
+                                                        @endforeach
 													</td>
 													<td>
-                                                        @if($brand->status == 1)
+                                                        @if($brand->status === 1)
                                                             <span class="label success">{{ __('Active') }}</span>
                                                         @else
                                                             <span class="label warning">{{ __('Inactive') }}</span>
                                                         @endif
 													</td>
 													<td class="center">
-														<a class="m-btn btn btn-success" href="{{route('categories.show',$brand->id)}}">
+														<a class="m-btn btn btn-success" href="{{route('brands.show',$brand->id)}}">
 															<i class="material-icons">search</i>
 														</a>
-														<a class="m-btn btn btn-info" href="{{route('categories.edit',$brand->id)}}">
+														<a class="m-btn btn btn-info" href="{{route('brands.edit',$brand->id)}}">
 															<i class="material-icons">settings</i>
 														</a>
-                                                        <form style="display: inline !important;" action="{{route('categories.destroy', $brand->id)}}" method="POST">
+                                                        <form style="display: inline !important;" action="{{route('brands.destroy', $brand->id)}}" method="POST">
                                                             @CSRF
                                                             @METHOD('DELETE')
                                                             <button type="submit" class="m-btn btn btn-danger" title="Delete User" onclick="return confirmDel()">
@@ -153,8 +158,6 @@
             else
                 return false;
         }
-
-        @include('admin.partial.script')
 	</script>
 
 @endsection

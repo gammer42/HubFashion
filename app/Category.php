@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Brand;
+
 
 class Category extends Model
 {
@@ -20,4 +22,9 @@ class Category extends Model
     public function children(){
         return $this->hasMany('App\Category','parent_id')->orderBy('name','asc');
     }
+
+    public function brands(){
+        return $this->belongsToMany(Brand::class);
+    }
+
 }

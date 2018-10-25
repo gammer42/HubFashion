@@ -78,3 +78,25 @@ Route::resource('categories','AdminCategoryController')->middleware('verified');
 //Route::GET('categories/{id}/edit','AdminCategoryController@edit')->name('categories.edit');
 //Route::PUT('categories/{id}','AdminCategoryController@update')->name('categories.update');
 //Route::DELETE('categories/{id}','AdminCategoryController@destroy')->name('categories.destroy');
+
+//                         AdminBrandController
+
+Route::resource('brands','AdminBrandController')->middleware('verified');
+
+//Route::GET('brands','AdminBrandController@index')->name('brands.index');
+//Route::GET('brands/create','AdminBrandController@create')->name('brands.create');
+//Route::POST('brands','AdminBrandController@store')->name('brands.store');
+//Route::GET('brands/{id}','AdminBrandController@show')->name('brands.show');
+//Route::GET('brands/{id}/edit','AdminBrandController@edit')->name('brands.edit');
+//Route::PUT('brands/{id}','AdminBrandController@update')->name('brands.update');
+//Route::DELETE('brands/{id}','AdminBrandController@destroy')->name('brands.destroy');
+
+Route::resource('products','AdminProductController')->middleware('verified');
+
+//Route::GET('products','AdminProductController@index')->name('products.index');
+//Route::GET('products/create','AdminProductController@create')->name('products.create');
+//Route::POST('products','AdminProductController@store')->name('products.store');
+//Route::GET('products/{id}','AdminProductController@show')->name('products.show');
+//Route::GET('products/{id}/edit','AdminProductController@edit')->name('products.edit');
+//Route::PUT('products/{id}','AdminProductController@update')->name('products.update');
+//Route::DELETE('products/{id}','AdminProductController@destroy')->name('products.destroy');

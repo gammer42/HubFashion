@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('navbar')
-    <a class="navbar-brand bold" href="#">Category Created by Authority</a>
+    <a class="navbar-brand bold" href="#">Brands Created by Authority</a>
 @endsection
 @section('content')
 
@@ -20,11 +20,11 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title bold">{{ __('Create Category') }}</h4>
-                                    <p class="card-category">{{ __('Authority can Create Category Here...') }}</p>
+                                    <h4 class="card-title bold">{{ __('Create Brands') }}</h4>
+                                    <p class="card-category">{{ __('Authority can Create Brands Here...') }}</p>
                                 </div>
                                 <div class="card-body" >
-                                    <form action="{{route('categories.store')}}" method="POST">
+                                    <form action="{{route('brands.store')}}" method="POST">
                                         @CSRF
                                         <div class="row">
                                             <div class="col-md-1"></div>
@@ -44,27 +44,8 @@
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Category Name') }}</label>
+                                                    <label class="bmd-label-floating bold">{{ __('Brands Name') }}</label>
                                                     <input type="text" id="category_name" class="form-control" name="name" value="{{old('name')}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Parent Category') }}</label>
-                                                    <select style="color:#888D9B;" class="form-control" name="parent" id="parent" data-placeholder="Parent Category">
-                                                        <option style="background-color:#202940; color:#ffffff;"  value="0">/</option>
-                                                        @foreach($categories as $parent)
-                                                            <option class="bold" style="background-color:#0e0e40;" value="{{ $parent->id }}">{{ $parent->name }}</option>
-                                                            @if($parent->children->count())
-                                                                @foreach($parent->children as $child)
-                                                                    <option style="background-color:#153140;" value="{{ $child->id }}">./{{ $child->name }}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,15 +82,39 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating bold">{{ __('Category') }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    @foreach($categories as $category)
+                                                        <div class="col-md-6" style="float:left;">
+
+                                                            <label class="checkbox inline" style="width:210px;">
+                                                                <input name="categories[]" type="checkbox" class="selectAll" value="{{$category->id}}"}}>
+                                                                {{$category->name}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary pull-right">Create Category</button>
+                                                    <button type="submit" class="btn btn-primary pull-right">Create Brands</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('categories.index')}}" >Cancel</a></button>
+                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('brands.index')}}" >Cancel</a></button>
                                                 </div>
                                             </div>
                                         </div>

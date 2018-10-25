@@ -38,7 +38,19 @@
             <li class="nav-item ">
                 <a class="nav-link" href="{{route('categories.index')}}">
                     <i class="material-icons">library_books</i>
-                    <p>{{ __('Categroy') }}</p>
+                    <p>{{ __('Category') }}</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('brands.index')}}">
+                    <i class="material-icons">library_books</i>
+                    <p>{{ __('Brands') }}</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('products.index')}}">
+                    <i class="material-icons">library_books</i>
+                    <p>{{ __('Products') }}</p>
                 </a>
             </li>
             <li class="nav-item ">

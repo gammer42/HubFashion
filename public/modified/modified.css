@@ -11,7 +11,12 @@
   margin: 0!important;
   padding: 5px!important;
 }
-
+.spacial{
+    padding: 2px !important;
+    /*-webkit-border-radius: !important;*/
+    /*-moz-border-radius: !important;*/
+    border-radius: 2px !important;
+}
 .label {
   color: white;
   padding: 5px;
@@ -22,7 +27,8 @@
 .info {background-color: #2196F3;} /* Blue */
 .warning {background-color: #ff9800;} /* Orange */
 .mod-btn-danger {background-color: #f44336;} /* Red */
-.mod-btn-other {background-color: #e7e7e7; color: black;} /* Gray */
+.mod-btn-other {background-color: #cbe771; color: #030303;
+    font-weight: bold !important;} /* Gray */
 
 .form-i-control{
 

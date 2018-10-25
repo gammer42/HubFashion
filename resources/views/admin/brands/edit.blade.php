@@ -24,7 +24,7 @@
                                     <p class="card-category">{{ __('Authority can Update Brands Here...') }}</p>
                                 </div>
                                 <div class="card-body" >
-                                    <form action="{{ route('brands.update',$brands->id) }}" method="POST">
+                                    <form action="{{route('brands.update', $brands->id)}}" method="POST">
                                         @CSRF
                                         @METHOD('PUT')
                                         <div class="row">
@@ -46,7 +46,7 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label class="bmd-label-floating bold">{{ __('Brands Name') }}</label>
-                                                    <input type="text" id="category_name" class="form-control" name="name" onclick="toSlug(this)" value="{{ $brands->name }}">
+                                                    <input type="text" id="category_name" class="form-control" name="name" value="{{ $brands->name }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -55,26 +55,10 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label class="bmd-label-floating">{{ __('Slug') }}</label>
-                                                    <input type="text" id="slug_name" class="form-control" name="slug" value="{{ $categories->slug }}">
+                                                    <input type="text" id="slug_name" class="form-control" name="slug" value="{{ $brands->slug }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    @foreach($permissions as $permission)
-                                                        <div class="col-md-6" style="float:left;">
-                                                            <label class="checkbox inline">
-                                                                <input name="permissions[]" class="selectAll" type="checkbox"  value="{{$permission->id}}" {{ in_array($permission->id,$checked)? "checked":"" }}>
-                                                                {{$permission->display_name}}
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
@@ -88,13 +72,36 @@
                                             <div class="col-md-7">
                                                 <div>
                                                     <input type="radio" id="active"
-                                                           name="status" value="1" {{$categories->status == 1?"checked":""}}/>
+                                                           name="status" value="1" {{ $brands->status===1? "checked":"" }}/>
                                                     <label for="active">{{ __('Active') }}</label>
                                                 </div>
                                                 <div>
                                                     <input type="radio" id="inactive"
-                                                           name="status" value="0" {{$categories->status == 0?"checked":""}}/>
+                                                           name="status" value="0"{{ $brands->status===0? "checked":"" }}/>
                                                     <label for="inactive">{{ __('Inactive') }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating bold">{{ __('Category') }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    @foreach($categories as $category)
+                                                        <div class="col-md-6" style="float:left;">
+                                                            <label class="checkbox inline" style="width:210px;">
+                                                                <input name="categories[]" type="checkbox" class="selectAll" value="{{$category->id}}"{{ in_array($category->id,$given)? "checked":"" }}>
+                                                                {{$category->name}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -102,12 +109,12 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary pull-right">Update Category</button>
+                                                    <button type="submit" class="btn btn-primary pull-right">Update Brands</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('categories.index')}}" >Cancel</a></button>
+                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('brands.index')}}" >Cancel</a></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,7 +174,7 @@
 
         function custom_str_concate(val1,val2){
             if(val1 === "/")
-                return val2;
+                return '_'+val1.concat(val2);
             else
                 return val1+'-'+val2;
         }
@@ -181,7 +188,6 @@
                 $("#slug_name").val(slug);
             });
         });
-
     </script>
 
 

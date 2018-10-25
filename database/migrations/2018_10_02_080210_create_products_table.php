@@ -15,17 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cat_id')->unsigned();
-            $table->foreign('cat_id')->references('id')->on('categories');
-            $table->integer('br_id')->unsigned();
-            $table->foreign('br_id')->references('id')->on('brands');
-            $table->string('pro_name');
-            $table->string('pro_slug');
-            $table->string('pro_ideal');
-            $table->string('pro_fabric');
-            $table->string('pro_color');
-            $table->string('pro_old_price');
-            $table->string('pro_new_price');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->integer('brand_id')->unsigned();
+            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('ideal');
+            $table->string('fabric');
+            $table->string('color');
+            $table->string('price');
             $table->string('description');
             $table->timestamps();
         });

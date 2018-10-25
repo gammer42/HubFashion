@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('navbar')
-    <a class="navbar-brand bold" href="#">Category Created by Authority</a>
+    <a class="navbar-brand bold" href="#">Product Added by Authority</a>
 @endsection
 @section('content')
 
@@ -20,11 +20,11 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title bold">{{ __('Create Category') }}</h4>
-                                    <p class="card-category">{{ __('Authority can Create Category Here...') }}</p>
+                                    <h4 class="card-title bold">{{ __('Add Product') }}</h4>
+                                    <p class="card-category">{{ __('Authority can Add Product in Here...') }}</p>
                                 </div>
                                 <div class="card-body" >
-                                    <form action="{{route('categories.store')}}" method="POST">
+                                    <form action="{{route('products.store')}}" method="POST">
                                         @CSRF
                                         <div class="row">
                                             <div class="col-md-1"></div>
@@ -44,25 +44,34 @@
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Category Name') }}</label>
-                                                    <input type="text" id="category_name" class="form-control" name="name" value="{{old('name')}}">
+                                                    <label class="bmd-label-floating bold">{{ __('Product Name') }}</label>
+                                                    <input type="text" id="product_name" class="form-control" name="name" value="{{old('name')}}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2"></div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Parent Category') }}</label>
-                                                    <select style="color:#888D9B;" class="form-control" name="parent" id="parent" data-placeholder="Parent Category">
-                                                        <option style="background-color:#202940; color:#ffffff;"  value="0">/</option>
+                                                    <label class="bmd-label-floating bold">{{ __('Category') }}</label>
+                                                    <select style="color:#888D9B;" class="form-control" name="category" data-placeholder="Category">
                                                         @foreach($categories as $parent)
                                                             <option class="bold" style="background-color:#0e0e40;" value="{{ $parent->id }}">{{ $parent->name }}</option>
                                                             @if($parent->children->count())
                                                                 @foreach($parent->children as $child)
-                                                                    <option style="background-color:#153140;" value="{{ $child->id }}">{{ $child->name }}</option>
+                                                                    <option style="background-color:#153140;" value="{{ $child->id }}"><span> {{ $child->name }}</span></option>
                                                                 @endforeach
                                                             @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating bold">{{ __('Brands') }}</label>
+                                                    <select style="color:#888D9B;" class="form-control" name="brand" data-placeholder="Brands">
+                                                        @foreach($brands as $brand)
+                                                            <option class="bold" style="background-color:#0e0e40;" value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -81,35 +90,73 @@
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label class="bmd-label-floating bold">{{ __('Active Status') }}</label>
+                                                    <label class="bmd-label-floating">{{ __('Ideal For') }}</label>
+                                                    <input type="text" id="ideal" class="form-control" name="ideal" value="{{old('ideal')}}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3"></div>
-                                            <div class="col-md-7">
-                                                <div>
-                                                    <input type="radio" id="active"
-                                                           name="status" value="1" checked/>
-                                                    <label for="active">{{ __('Active') }}</label>
-                                                </div>
-                                                <div>
-                                                    <input type="radio" id="inactive"
-                                                           name="status" value="0"/>
-                                                    <label for="inactive">{{ __('Inactive') }}</label>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Size') }}</label>
+                                                    <input type="text" id="size" class="form-control" name="size" value="{{old('size')}}">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Fabric') }}</label>
+                                                    <input type="text" id="fabric" class="form-control" name="fabric" value="{{old('fabric')}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Color') }}</label>
+                                                    <input type="text" id="color" class="form-control" name="color" value="{{old('color')}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Price TK') }}</label>
+                                                    <input type="text" id="price" class="form-control" name="price" value="{{old('price')}}">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Image') }}</label>
+                                                    <input type="text" id="price" class="form-control" name="price" value="{{old('image')}}">
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">{{ __('Description') }}</label>
+                                                    <input type="text" id="description" class="form-control" name="description" value="{{old('description')}}">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary pull-right">Create Category</button>
+                                                    <button type="submit" class="btn btn-primary pull-right">Create Brands</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('categories.index')}}" >Cancel</a></button>
+                                                    <button class="btn btn-primary pull-right" type="reset" ><a href="{{route('brands.index')}}" >Cancel</a></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,13 +204,14 @@
             }
         }
 
-        $("#category_name").keyup(function(){
+        $("#product_name").keyup(function(){
             let text = $(this).val();
-            let parslug = $('#parent').find(":selected").text();
-            // let text = $('#category_name').val();
-            let slug = custom_str_concate(parslug,text);
-            slug = slug.trim();
-            slug = slug.toLowerCase().replace(/ /g, '_').replace(/^\s+|\s+$[^\w-]+ /g, '').replace(/_->_/gm,"/");
+            // let parslug = $('#parent').find(":selected").text();
+            // // let text = $('#category_name').val();
+            // let slug = custom_str_concate(parslug,text);
+            // slug = slug.trim();
+            slug = text.trim();
+            slug = slug.toLowerCase().replace(/ /g, '-').replace(/^\s+|\s+$[^\w-]+ /g, '').replace(/_->_/gm,"-");
             $("#slug_name").val(slug);
         });
 

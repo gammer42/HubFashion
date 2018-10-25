@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean('status');
             $table->timestamps();
         });
+
     }
 
     /**

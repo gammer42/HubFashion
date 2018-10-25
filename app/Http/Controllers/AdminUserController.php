@@ -101,6 +101,13 @@ class AdminUserController extends Controller
         $users = User::query()->findorfail($id);
         $roles = Role::all();
         $given_roles = DB::table('role_user')->where('role_user.user_id',$id)->select('role_user.role_id')->get();
+        echo $given_roles;
+        $name = 'user';
+        $given = $given_roles;
+        if($given = []) {
+            $given = DB::table('roles')->where('roles.name', '=', $name)->get();
+        }
+        dd($given);
         return view('admin.users.edit', compact('users','roles','given_roles'));
     }
 
